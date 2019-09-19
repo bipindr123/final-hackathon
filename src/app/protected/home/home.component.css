@@ -1,0 +1,82 @@
+.demo-card1 > .mdl-card__title {
+    color: #fff;
+    background:
+      url('/assets/ag.png') bottom 50% right 15% no-repeat #f23b79;
+  }
+
+  .demo-card2 > .mdl-card__title {
+    color: #fff;
+    background:
+      url('/assets/analytics.png') bottom 50% right 15% no-repeat rgba(4,4,180,0.91);
+  }
+
+  .demo-card3 > .mdl-card__title {
+    color: #fff;
+    background:
+      url('/assets/d1.png') bottom 50% right 15% no-repeat #673ab7;
+  }
+
+  .demo-card4 > .mdl-card__title {
+    color: #fff;
+    background:
+      url('/assets/dual-chart.png') bottom 50% right 15% no-repeat #ffa726;
+  }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  transition: 0.3s;
+  width:100%;
+  min-height:400px;
+  cursor:pointer;
+}
+
+.cardnew {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  transition: 0.3s;
+  width:100%;
+  min-height:445px;
+  cursor:pointer;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+}
+
+.cardnew:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+}
+
+.buttontext {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color:rgb(63,81,181);
+  padding:10px;
+}
+
+.topcard {
+  width:100%;
+  height:200px;
+  text-align:center;
+  padding-top:20px;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.color1 {
+  background-color: #bfff00;
+}
+
+.color2 {
+  background-color: #18ffff;
+}
+.color3 {
+  background-color: #1de9b6;
+}
+.color4 {
+  background-color: #fef100;
+}
+
+.backgroundcard {
+  width:100%;
+}

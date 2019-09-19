@@ -1,0 +1,255 @@
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600,700,800'
+rel='stylesheet'
+type='text/css'>
+
+<div *ngIf="!loaded" id="overlay">
+<div id="loader">
+<div id="box"></div>
+<div id="hill"></div>
+</div>
+</div>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+<div class="mdl-layout__header">
+<div class="mdl-layout__header-row" style="padding-right: 10px !important">
+<span class="mdl-layout-title">{{title}}</span>
+<div class="mdl-layout-spacer"></div>
+<nav class="mdl-navigation mdl-layout--large-screen-only">
+</nav>
+<div>
+  <popover-content #myPopover [closeOnClickOutside]="true" placement="bottom" [animation]="true">
+    <div id="testify" style="overflow-y:auto; max-height:80vh; margin-right:-9px; margin-left:-5px">
+      <span style="color:black">
+        <div style="padding-bottom:20px">
+          <div class="pull-left" style="display:inline;font-size:x-large">Notifications</div>
+          <button *ngIf="z!=0" class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                  (click)="clearall()"><i class="material-icons">clear_all</i></button>
+        </div>
+      </span>
+      <hr>
+      <div *ngIf="z==0" style="color:black;padding-bottom: 8px;">No Notifications to show!</div>
+    </div>
+  </popover-content>
+  <div style="padding-right:50px">
+  <button [popover]="myPopover" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">notifications</i>
+    </button>
+  </div>
+</div>
+<button id="demo-menu-lower-right" [popover]="mypopover2" class="mdl-button mdl-js-button mdl-button--icon"
+        style="margin-right: 2%">
+        <i class="material-icons">settings</i>
+</button>
+
+<popover-content #mypopover2 [closeOnClickOutside]="true" placement="auto bottom" [animation]="true"
+                 style="margin-right: 50px">
+  <div id="testify2">
+      <span style="color:black">
+        <div style="padding-bottom:20px">
+          <div class="pull-left" style="display:inline;font-size:x-large">Settings</div>
+
+        </div>
+      </span>
+    <hr>
+    <div style="color:black">
+          <div style="font-size:16px;font-weight:600;">Theme</div>
+          <br>
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+            <input type="checkbox" id="switch-1" class="mdl-switch__input" [checked]="checked" (change)="slidetogglechecked()">
+            <span class="mdl-switch__label">Dark Mode</span>
+          </label>
+        <hr>
+          <div style="padding-left:4%">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" data-toggle="modal" data-target="#myModal">Change Core</button>
+          </div>
+        <hr>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" data-toggle="modal" data-target="#myModal2">Change Goals</button>
+        <hr>
+        <div style="padding-left:19%">
+          <button (click)="logout()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">LOG OUT</button>
+        </div>
+    </div>
+  </div>
+</popover-content>
+
+
+</div>
+</div>
+<div class=" mdl-layout__drawer" style="background: rgb(63,81,181)">
+<span class="mdl-layout-title" style="padding-left: 33.5%"><span style="color:white">Welcome</span></span>
+<nav class="mdl-navigation">
+
+<button class="mdl-navigation__link" md-button [routerLink]="['./profile']"><img class="img-circle" height="100" style="width:auto;display:block;margin-left:22%" src="https://lh4.googleusercontent.com/-KrUpjv4wae8/AAAAAAAAAAI/AAAAAAAAHhM/iGPGrEMUnwQ/photo.jpg">
+  <span style="color:white;align-self: center;font-weight:400;font-size:20px">John Herbert</span>
+</button>
+<hr>
+<button class="mdl-navigation__link" md-button [routerLink]="['./home']"><img
+  style="height:70px; width: auto; display:block; margin-left:28%" src="/assets/home.png"><span
+  style="color:white;font-weight:400;font-size:20px">Home</span></button>
+<button class="mdl-navigation__link" md-button [routerLink]="['./table']"><img
+  style="height:70px; width: auto; display:block; margin-left:28%" src="/assets/table-grid.png"><span
+  style="color:white;font-weight:400;font-size:20px">Table</span></button>
+
+</nav>
+</div>
+<main class="mdl-layout__content">
+<div id="outlet" class="background-image">
+<router-outlet></router-outlet>
+</div>
+</main>
+</div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" style="width:400px">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:rgb(63,81,181);text-align:center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="font-weight:600;font-size:20px;color:white">Core Metrics</h4>
+        </div>
+        <div class="modal-body">
+          <label for="sel1">Core Metric 1:</label>
+          <select class="form-control" id="sel1" (change)="onChange1($event.target.value)">
+            <option *ngFor="let metric of metrics" [selected]="metric==core1">{{metric}}</option>
+          </select>
+          <br>
+          <br>
+          <label for="sel2">Core Metric 2:</label>
+          <select class="form-control" id="sel2" (change)="onChange2($event.target.value)">
+            <option *ngFor="let metric of metrics" [selected]="metric==core2">{{metric}}</option>
+          </select>
+          <br>
+          <br>
+          <label for="sel3">Core Metric 3:</label>
+          <select class="form-control" id="sel3" (change)="onChange3($event.target.value)">
+            <option *ngFor="let metric of metrics" [selected]="metric==core3">{{metric}}</option>
+          </select>
+          <br>
+        </div>
+        <div class="modal-footer" style="background-color:rgb(63,81,181);">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalclosed()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog" style="width:600px">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:rgb(63,81,181);text-align:center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="font-weight:600;font-size:20px;color:white">Goals</h4>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="metrics">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[0]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[0]]" id="goal1">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[1]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[1]]" id="goal2">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[2]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[2]]" id="goal3">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[3]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[3]]" id="goal4">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[4]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[4]]" id="goal5">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[5]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[5]]" id="goal6">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[6]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[6]]" id="goal7">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[7]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[7]]" id="goal8">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[8]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[8]]" id="goal9">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[9]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[9]]" id="goal10">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[10]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[10]]" id="goal11">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="goal1">{{metrics[11]}}:</label>
+                <input type="text" class="form-control" [(ngModel)]="utils.goals[metrics[11]]" id="goal12">
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer" style="background-color:rgb(63,81,181);">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalclosed2()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="myModal3" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:300px;">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:rgb(63,81,181);text-align:center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="font-weight:600;font-size:20px;color:white">Compare Agents</h4>
+        </div>
+        <div class="modal-body" style="padding-left:32%">
+          <div *ngIf="agents">
+            <div *ngFor="let agent of agents; let i=index">
+              <md-checkbox (change)="checkboxcheck(i)">{{agent}}</md-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="background-color:rgb(63,81,181);">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalclosed3()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>

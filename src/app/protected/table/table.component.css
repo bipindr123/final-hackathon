@@ -1,0 +1,12 @@
+.mainpage {
+    margin-top:-20px
+}
+
+.table {
+    transition: 0.2s;
+    width: 60%;
+}
+
+.mdl-data-table tbody tr:hover {
+    background-color: #7E7E7E;
+  }
